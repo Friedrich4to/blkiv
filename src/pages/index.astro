@@ -1,0 +1,120 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Galeria from '../components/Galeria.astro';
+import Lightbox from '../components/Lightbox.astro';
+import Amenidades from '../components/Amenidades.astro';
+import Disponibilidad_Update from '../components/Disponibilidad_Update.astro';
+import MapaBavaro from '../components/MapaBavaro.astro';
+import Pagos from '../components/Pagos.astro';
+import '@photo-sphere-viewer/core/index.css';
+import { env } from 'cloudflare:workers';
+
+interface URow {
+  id: number;
+  numero: string;
+  m2: number;
+  patio_m2: number | null;
+  terraza_m2: number | null;
+  m2_total: number;
+  disponibilidad: string;
+  tour_url: string | null;
+  gallery: string;
+  precio: number;
+}
+
+let units: URow[] = [];
+
+try {
+  const db = env.DB;
+  if (db) {
+    const res = await db.prepare('SELECT * FROM units ORDER BY numero').all<URow>();
+    units = res.results ?? [];
+  }
+} catch (e) {
+  console.error('index DB error:', e);
+}
+---
+
+<Layout title="Inicio">
+  <main>
+    <Hero />
+
+    <section id="descripcion" class="px-[4vw] py-24 text-center">
+      <div class="w-full max-w-3xl mx-auto flex flex-col items-center gap-8">
+        <div class="flex flex-col items-center gap-3">
+          <p id="desc-label" class="font-display font-black text-sm uppercase tracking-[0.25em] text-second">Acerca de</p>
+          <img id="desc-title" src="/logo.svg" alt="Costamare" class="w-[clamp(14rem,50vw,36rem)] h-auto" />
+        </div>
+
+        <p id="desc-paragraph" class="text-[20px] md:text-3xl leading-relaxed max-w-3xl text-second">
+          Se trata de un desarrollo de baja densidad ubicado en Costa Cana, Bávaro, diseñado para combinar arquitectura contemporánea con alta rentabilidad.
+        </p>
+
+        <a
+          id="desc-cta"
+          href="/dossier.pdf"
+          download="dossier-costamare.pdf"
+          class="text-xl px-10 py-4 rounded-md border-2 border-base text-base font-medium hover:bg-base hover:text-white transition-colors duration-300 no-underline"
+        >
+          Descarga nuestro <strong>Dossier</strong>
+        </a>
+      </div>
+    </section>
+
+    <Galeria />
+    <Lightbox />
+    <!-- <Unidades unitTypes={unitTypes} /> -->
+    <Disponibilidad_Update units={units} />
+    <section id="maqueta" class="relative flex w-full h-[70svh] items-center justify-center overflow-hidden">
+      <div id="maqueta-psv" class="absolute inset-0 w-full h-full" style="pointer-events:none;"></div>
+      <div class="absolute inset-0 bg-base/50"></div>
+      <a
+        href="/tour/exterior"
+        class="relative z-10 px-8 py-4 text-[18px] rounded-full bg-white text-base hover:bg-base hover:text-white transition-colors duration-300"
+      >
+        Explorar Tour 360°
+      </a>
+    </section>
+        <div class="hidden"><Amenidades /></div>
+    <MapaBavaro />
+    <Pagos />
+  </main>
+</Layout>
+
+<script>
+  import '../scripts/descripcion.js';
+</script>
+
+<script>
+  import { Viewer } from '@photo-sphere-viewer/core';
+
+  const container = document.getElementById('maqueta-psv') as HTMLElement;
+
+  const viewer = new Viewer({
+    container,
+    panorama: '/tour/piscina.avif',
+    navbar: false,
+    defaultZoomLvl: 0,
+    moveSpeed: 0,
+    zoomSpeed: 0,
+    mousewheel: false,
+    mousemove: false,
+    touchmoveTwoFingers: false,
+    keyboard: false,
+  });
+
+  viewer.addEventListener('ready', () => {
+    let yaw = 0;
+    const SPEED = 0.0004;
+
+    function autoRotate() {
+      yaw += SPEED;
+      viewer.rotate({ yaw, pitch: 0 });
+      requestAnimationFrame(autoRotate);
+    }
+
+    requestAnimationFrame(autoRotate);
+  }, { once: true });
+</script>
