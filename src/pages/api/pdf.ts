@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(pdf, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="listado-precios-costamare.pdf"',
+        'Content-Disposition': 'attachment; filename="listado-precios-blkr4.pdf"',
       },
     });
   } catch (e) {

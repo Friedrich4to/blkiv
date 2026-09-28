@@ -10,6 +10,7 @@ interface URow {
   m2: number;
   patio_m2: number | null;
   terraza_m2: number | null;
+  locker_m2: number | null;
   m2_total: number;
   disponibilidad: string;
   tour_url: string | null;
@@ -34,7 +35,7 @@ try {
   <div class="px-[4vw] pt-10 pb-4">
   <div class="max-w-7xl mx-auto flex flex-col gap-6">
     <!-- Logo -->
-    <img src="/logo.svg" alt="Costamare" class="h-10 w-auto self-start" />
+    <img src="/logo.svg" alt="BLK Residences IV" class="h-10 w-auto self-start" />
 
     <!-- Ir al sitio web -->
     <a
@@ -81,7 +82,7 @@ try {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'listado-precios-costamare.pdf';
+      a.download = 'listado-precios-blkr4.pdf';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

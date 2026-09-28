@@ -82,7 +82,22 @@
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\Costamare\\\\costamare_web\\\\src\\\\components\" -Force)",
       "Bash(Select-Object Name, FullName)",
       "Bash(Get-ChildItem \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\Costamare\\\\costamare_web\\\\public\\\\tour\")",
-      "Bash(Sort-Object Name)"
+      "Bash(Sort-Object Name)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\" -Force)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\" -Name)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\public\\\\assets\\\\units\" -ErrorAction SilentlyContinue)",
+      "Bash(Remove-Item \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\migrations\\\\0001_from_original.sql\" -Force)",
+      "Bash(Remove-Item \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\migrations\\\\0001_initial_schema.sql\" -Force)",
+      "Bash(Remove-Item \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\migrations\\\\0002_costamare_seed.sql\" -Force)",
+      "Bash(Remove-Item \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\migrations\\\\0002_seed_data.sql\" -Force)",
+      "Bash(Write-Output \"Deleted 4 stale migration files\")",
+      "Bash(taskkill /F /IM node.exe)",
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)",
+      "Bash(node -e ' *)",
+      "Bash(Get-ChildItem \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\public\\\\assets\" -Recurse -Name)",
+      "Bash(dir \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\public\\\\assets\\\\gallery\")",
+      "Bash(findstr /r \"SELECT.*FROM units\" src\\\\pages\\\\*.astro src\\\\pages\\\\api\\\\*.ts)"
     ]
   }
 }

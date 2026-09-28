@@ -5,6 +5,7 @@ interface URow {
   m2: number;
   patio_m2: number | null;
   terraza_m2: number | null;
+  locker_m2: number | null;
   m2_total: number;
   disponibilidad: string;
   tour_url: string | null;
@@ -26,6 +27,7 @@ const units = rawUnits.map(u => ({
   m2:             u.m2,
   patio_m2:       u.patio_m2,
   terraza_m2:     u.terraza_m2,
+  locker_m2:      u.locker_m2,
   m2_total:       u.m2_total,
   tourUrl:        u.tour_url ?? '#',
   precio:         u.precio,
@@ -151,12 +153,18 @@ const statusLabel: Record<string, string> = {
                     </span>
                     <span class="flex items-center gap-1.5">
                       <img src="/assets/icons/bath.svg" alt="" class="h-4 w-auto" aria-hidden="true" />
-                      2 baños
+                      {parseInt(unit.numero) >= 400 ? '2.5' : '2'} baños
                     </span>
                     <span class="flex items-center gap-1.5">
                       <img src="/assets/icons/parqueo.svg" alt="" class="h-4 w-auto" aria-hidden="true" />
-                      1 parqueo
+                      2 parqueos
                     </span>
+                    {unit.locker_m2 && (
+                      <span class="flex items-center gap-1.5">
+                        <img src="/assets/icons/locker.svg" alt="" class="h-4 w-auto" aria-hidden="true" />
+                        Locker {unit.locker_m2} m²
+                      </span>
+                    )}
                   </div>
 
                 </div>
@@ -186,27 +194,31 @@ const statusLabel: Record<string, string> = {
       <div class="w-full lg:flex-1 lg:min-w-0 lg:sticky lg:top-[10svh] pt-0 lg:pt-24">
         <div class="relative">
 
+          <!-- SVG unit overlay — 3 bloques × 4 niveles
+               Coordinates are approximate; adjust to match /assets/unidades/base.png -->
           <svg
             class="absolute inset-0 w-full h-full z-10"
             viewBox="0 0 2107 645"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <!-- Floor 1 -->
-            <rect data-unit="101" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="35"   y="488" width="426" height="157" fill="#002E6B"/>
-            <rect data-unit="102" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="602"  y="488" width="451" height="157" fill="#002E6B"/>
-            <rect data-unit="103" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1053" y="488" width="451" height="157" fill="#002E6B"/>
-            <rect data-unit="104" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1646" y="488" width="426" height="157" fill="#002E6B"/>
-            <!-- Floor 2 -->
-            <rect data-unit="201" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="35"   y="331" width="426" height="157" fill="#002E6B"/>
-            <rect data-unit="202" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="602"  y="331" width="451" height="157" fill="#002E6B"/>
-            <rect data-unit="203" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1053" y="331" width="451" height="157" fill="#002E6B"/>
-            <rect data-unit="204" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1646" y="331" width="426" height="157" fill="#002E6B"/>
-            <!-- Penthouse -->
-            <rect data-unit="301" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="35"   y="29"  width="426" height="302" fill="#002E6B"/>
-            <rect data-unit="302" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="602"  y="29"  width="451" height="302" fill="#002E6B"/>
-            <rect data-unit="303" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1053" y="29"  width="451" height="302" fill="#002E6B"/>
-            <rect data-unit="304" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1646" y="29"  width="426" height="302" fill="#002E6B"/>
+            <!-- Bloque col positions: 01→x=35 w=626 | 02→x=741 w=625 | 03→x=1446 w=626 -->
+            <!-- Nivel 1 (bottom) -->
+            <rect data-unit="101" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="35"   y="475" width="626" height="150" fill="#002E6B"/>
+            <rect data-unit="102" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="741"  y="475" width="625" height="150" fill="#002E6B"/>
+            <rect data-unit="103" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1446" y="475" width="626" height="150" fill="#002E6B"/>
+            <!-- Nivel 2 -->
+            <rect data-unit="201" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="35"   y="325" width="626" height="150" fill="#002E6B"/>
+            <rect data-unit="202" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="741"  y="325" width="625" height="150" fill="#002E6B"/>
+            <rect data-unit="203" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1446" y="325" width="626" height="150" fill="#002E6B"/>
+            <!-- Nivel 3 -->
+            <rect data-unit="301" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="35"   y="175" width="626" height="150" fill="#002E6B"/>
+            <rect data-unit="302" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="741"  y="175" width="625" height="150" fill="#002E6B"/>
+            <rect data-unit="303" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1446" y="175" width="626" height="150" fill="#002E6B"/>
+            <!-- Nivel 4 / Penthouse -->
+            <rect data-unit="401" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="35"   y="29"  width="626" height="146" fill="#002E6B"/>
+            <rect data-unit="402" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="741"  y="29"  width="625" height="146" fill="#002E6B"/>
+            <rect data-unit="403" class="d-unit-shape" style="opacity:0;cursor:pointer;transition:opacity 0.2s" x="1446" y="29"  width="626" height="146" fill="#002E6B"/>
           </svg>
 
           <img
@@ -274,7 +286,7 @@ const statusLabel: Record<string, string> = {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'listado-precios-costamare.pdf';
+      a.download = 'listado-precios-blkr4.pdf';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

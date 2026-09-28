@@ -11,13 +11,13 @@
 }
 
 @theme {
-  --color-base: #205469;
-  --color-second: #1C1C1C;
-  --color-white: #FAF6F3;
+  --color-base: #525252;
+  --color-second: #202020;
+  --color-white: #F3F3F3;
   --color-red: #C23E3E;
   --color-green: #397207;
   --color-yellow: #B8900D;
-  --color-gray-100: #F5F0ED;
+  --color-gray-100: #E6E6E6;
   --color-gray-200: #E3E3E3;
   --font-sans: 'Bricolage Grotesque', sans-serif;
   --font-display: 'BlackMango', sans-serif;

@@ -31,7 +31,7 @@ try {
   <!-- ── Auth overlay ─────────────────────────────────────── -->
   <div id="auth-overlay" class="fixed inset-0 z-50 flex items-center justify-center" style="background:rgba(29,29,29,0.97);backdrop-filter:blur(4px)">
     <div style="background:#fff;border-radius:1.25rem;padding:2.5rem;width:100%;max-width:22rem;margin:1rem;box-shadow:0 25px 60px rgba(0,0,0,0.4)">
-      <p class="admin-logo">Costamare</p>
+      <p class="admin-logo">BLK Residences IV</p>
       <h1 style="font-size:1.25rem;font-weight:600;color:#1D1D1D;margin:0 0 0.25rem">Disponibilidad</h1>
       <p style="font-size:0.8rem;color:#9ca3af;margin:0 0 1.75rem">Introduce tu API Key para continuar</p>
       <input id="api-key-input" type="password" placeholder="API Key" autocomplete="current-password"
@@ -51,7 +51,7 @@ try {
     <!-- Sticky header -->
     <header style="position:sticky;top:0;z-index:40;background:#1D1D1D;padding:0 1.5rem;height:3.75rem;display:flex;align-items:center;justify-content:space-between">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span style="font-family:var(--font-display);font-weight:700;color:#fff;font-size:1.1rem;letter-spacing:.04em">Costamare</span>
+        <span style="font-family:var(--font-display);font-weight:700;color:#fff;font-size:1.1rem;letter-spacing:.04em">BLK Residences IV</span>
         <span style="color:rgba(255,255,255,.45);font-size:0.8rem">Disponibilidad</span>
       </div>
       <div style="display:flex;align-items:center;gap:1rem">
@@ -208,7 +208,7 @@ try {
 </style>
 
 <script>
-  const STORAGE_KEY = 'costamare_admin_key';
+  const STORAGE_KEY = 'blkr4_admin_key';
 
   const STATUS_COLORS: Record<string, { bg: string; color: string; border: string }> = {
     available: { bg: '#f0fdf4', color: '#166534', border: '#86efac' },
@@ -306,7 +306,7 @@ try {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'listado-precios-costamare.pdf';
+      a.download = 'listado-precios-blkr4.pdf';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

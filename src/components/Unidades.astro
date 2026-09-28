@@ -1,139 +1,206 @@
 ---
-interface ParsedUT {
-  id: number;
-  type_key: string;
-  name: string;
-  price_usd: number;
-  interior_m2: number;
-  total_m2: number;
-  spaces: { name: string; m2: number }[];
-  tour_url: string;
-  gallery: string[];
-}
+type Unit = {
+  key: string;
+  tab: [string, string];
+  images: string[];
+  tourUrl: string;
+  features: (string | null)[];
+};
 
-interface Props {
-  unitTypes: ParsedUT[];
-}
+const units: Unit[] = [
+  {
+    key: 'bloque01',
+    tab: ['Bloque ', '01'],
+    images: ['/assets/units/bloque_1.png'],
+    tourUrl: '#',
+    features: [
+      '<strong>Dimensiones:</strong> 80.80 m²',
+      '<strong>2</strong> Habitaciones',
+      'Habitación principal con <strong>baño</strong>',
+      '<strong>Walking closet</strong> en Hab. principal',
+      null,
+      '<strong>2</strong> Parqueos',
+      'Sala – Comedor',
+      'Área de lavado',
+      'Baño común',
+      'Closets de ropa blanca',
+      'Locker de <strong>5.2 m²</strong>',
+    ],
+  },
+  {
+    key: 'bloque02',
+    tab: ['Bloque ', '02'],
+    images: ['/assets/units/bloque_2.png'],
+    tourUrl: '#',
+    features: [
+      '<strong>Dimensiones:</strong> 70.60 m²',
+      '<strong>2</strong> Habitaciones',
+      'Habitación principal con <strong>baño</strong>',
+      null,
+      '<strong>2</strong> Parqueos',
+      'Sala – Comedor',
+      'Área de lavado',
+      'Baño común',
+    ],
+  },
+  {
+    key: 'bloque03',
+    tab: ['Bloque ', '03'],
+    images: ['/assets/units/bloque_3.png'],
+    tourUrl: '#',
+    features: [
+      '<strong>Dimensiones:</strong> 80.80 m²',
+      '<strong>2</strong> Habitaciones',
+      'Habitación principal con <strong>baño</strong>',
+      '<strong>Walking closet</strong> en Hab. principal',
+      null,
+      '<strong>2</strong> Parqueos',
+      'Sala – Comedor',
+      'Área de lavado',
+      'Baño común',
+      'Closets de ropa blanca',
+      'Locker de <strong>4.2 m²</strong>',
+    ],
+  },
+  {
+    key: 'penthouses',
+    tab: ['', 'Penthouses'],
+    images: ['/assets/units/penth_1.png', '/assets/units/penth_2.png'],
+    tourUrl: '#',
+    features: [
+      '<strong>Dimensiones:</strong> 85.60 m²',
+      '<strong>Terraza:</strong> 53 m²',
+      '<strong>2</strong> Habitaciones',
+      'Habitación principal con <strong>baño</strong>',
+      '<strong>Walking closet</strong> en Hab. principal',
+      null,
+      '<strong>2</strong> Parqueos',
+      'Sala – Comedor',
+      'Área de lavado',
+      'Baño común',
+      'Closets de ropa blanca',
+      'Locker de <strong>5.2 m²</strong>',
+    ],
+  },
+];
 
-const { unitTypes } = Astro.props;
-
-const typeKeys = unitTypes.map(ut => ut.type_key);
-const tabLabels = Object.fromEntries(unitTypes.map(ut => [ut.type_key, ut.name]));
-const defaultKey = typeKeys[0] ?? '';
-const defaultUT = unitTypes[0];
+const defaultUnit = units[0];
+const defaultKey = defaultUnit.key;
 
 const unitsJson = JSON.stringify(
-  Object.fromEntries(unitTypes.map(ut => [ut.type_key, {
-    priceUSD:   ut.price_usd,
-    interiorM2: ut.interior_m2,
-    spaces:     ut.spaces,
-    tourUrl:    ut.tour_url,
-    gallery:    ut.gallery,
+  Object.fromEntries(units.map(u => [u.key, {
+    images: u.images,
+    tourUrl: u.tourUrl,
+    features: u.features,
   }]))
 );
 ---
 
 <section id="unidades" class="px-[4vw] py-16">
-  <script type="application/json" id="u-data" set:html={unitsJson}></script>
+  <script is:inline type="application/json" id="u-data" set:html={unitsJson}></script>
 
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
+  <div class="max-w-7xl mx-auto">
 
-    <!-- Left column -->
-    <div class="w-full md:w-1/2 flex flex-col justify-start gap-6">
+    <h2 class="font-display font-bold text-4xl md:text-5xl uppercase mb-10 tracking-tight">
+      Tipos de Unidades
+    </h2>
 
-      <!-- Tab selector -->
-      <nav class="flex items-center" aria-label="Tipo de unidad">
-        {typeKeys.map((key, i) => (
-          <>
-            <button
-              data-tab={key}
-              class:list={[
-                'u-tab font-display cursor-pointer pb-1 border-b-2 transition-all duration-200 text-base md:text-lg',
-                key === defaultKey
-                  ? 'font-extrabold border-base'
-                  : 'font-bold border-transparent opacity-40 hover:opacity-70',
-              ]}
-            >
-              {tabLabels[key]}
-            </button>
-            {i < typeKeys.length - 1 && (
-              <span class="mx-3 opacity-30 select-none pointer-events-none">|</span>
-            )}
-          </>
-        ))}
-      </nav>
+    <nav class="flex flex-wrap items-center gap-2 mb-10" aria-label="Tipo de unidad">
+      {units.map(u => (
+        <button
+          data-tab={u.key}
+          data-active={u.key === defaultKey ? '' : undefined}
+          class="u-tab font-display cursor-pointer px-4 py-1.5 transition-all duration-200 text-[18px]"
+        >
+          {u.tab[0]}<strong>{u.tab[1]}</strong>
+        </button>
+      ))}
+    </nav>
 
-      <!-- Unit details -->
-      <div class="flex flex-col gap-3">
-        <p id="u-price" class="font-sans font-bold text-2xl md:text-3xl">
-          US$ {(defaultUT?.price_usd ?? 0).toLocaleString('en-US')}
-        </p>
+    <div id="u-row" class="flex flex-col md:flex-row gap-12">
 
-        <p class="text-[rgba(7,50,71,0.65)]">
-          Interior&nbsp;&nbsp;<span id="u-interior" class="font-semibold text-base">{defaultUT?.interior_m2 ?? 0} m²</span>
-        </p>
+      <!-- Left: characteristics -->
+      <div id="u-left-col" class="w-full md:w-1/2 flex flex-col justify-start gap-6">
+        <p class="text-[14px] uppercase tracking-widest text-second/50">Caracteristicas</p>
 
-        <p class="text-[1.4rem] font-bold leading-none">—</p>
-
-        <ul id="u-spaces" class="flex flex-col gap-2">
-          {(defaultUT?.spaces ?? []).map((s: { name: string; m2: number }) => (
-            <li class="flex justify-between items-baseline gap-6 py-[0.6rem] border-b border-base/10 last:border-b-0">
-              <span class="text-[0.95rem] text-[rgba(7,50,71,0.7)]">{s.name}</span>
-              <span class="whitespace-nowrap text-[1.05rem] font-bold ml-0.5">
-                <strong>{s.m2.toFixed(2)}</strong>&nbsp;<strong>m²</strong>
-              </span>
-            </li>
-          ))}
+        <ul id="u-features" class="flex flex-col gap-2">
+          {defaultUnit.features.map(f =>
+            f === null
+              ? <li class="text-[24px] font-bold leading-none text-second/25">—</li>
+              : <li class="text-[24px] leading-snug text-second/80" set:html={f} />
+          )}
         </ul>
+
+        <a
+          id="u-tour-btn"
+          href={defaultUnit.tourUrl}
+          class="inline-flex items-center self-start mt-2 px-6 py-3 rounded-sm bg-second text-white text-[18px] no-underline leading-none transition-colors hover:bg-second/80"
+        >
+          Explorar Tour virtual
+        </a>
+
+        <div hidden aria-hidden="true">
+          {units.map(u => (
+            <img id={`fp-${u.key}`} src="/assets/unit-p1.svg" alt="" />
+          ))}
+        </div>
       </div>
 
-      <!-- Tour button -->
-      <a
-        id="u-tour-btn"
-        href={defaultUT?.tour_url ?? '#'}
-        class="inline-flex items-center gap-[0.4rem] self-start px-[1.6rem] py-3 rounded-full bg-base text-white no-underline leading-none transition-colors duration-200 hover:bg-base/80"
-      >
-        <span class="text-[0.9rem] opacity-80">Explorar</span>
-        <strong class="font-display font-bold text-[1rem]">Recorrido 360°</strong>
-      </a>
-
-      <!-- Building floorplan -->
-      <div class="relative w-full max-w-xs mt-2 bg-white">
-        <img id="fp-1er-piso" src="/assets/unit-p1.svg" alt="" class="absolute inset-0 w-full h-full" aria-hidden="true" />
-        <img id="fp-2do-piso" src="/assets/unit-p2.svg" alt="" class="absolute inset-0 w-full h-full hidden" aria-hidden="true" />
-        <img id="fp-penthouse" src="/assets/unit-ph.svg" alt="" class="absolute inset-0 w-full h-full hidden" aria-hidden="true" />
-        <img src="/assets/unit-build.svg" alt="Plano del edificio" class="relative w-full z-10" />
-      </div>
-    </div>
-
-    <!-- Right column: carousel -->
-    <div class="w-full md:w-1/2 flex flex-col gap-4 order-first md:order-0">
-      <div class="u-embla relative">
-        <div class="u-embla__viewport" data-lightbox-trigger>
-          <div class="u-embla__container" id="u-slides">
-            {(defaultUT?.gallery ?? []).map((src: string, i: number) => (
-              <div class="u-embla__slide">
-                <img src={src} data-full={src} alt={`Vista ${i + 1}`} loading="lazy" />
-              </div>
-            ))}
+      <!-- Right: carousel with floor plan images -->
+      <div class="w-full md:w-1/2 flex flex-col gap-4 order-first md:order-none">
+        <div class="u-embla relative">
+          <div class="u-embla__viewport">
+            <div class="u-embla__container" id="u-slides">
+              {defaultUnit.images.map((src, i) => (
+                <div class="u-embla__slide">
+                  <img
+                    src={src}
+                    alt={`Plano ${defaultUnit.tab.join('')}${i > 0 ? ` ${i + 1}` : ''}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
+
+          <button class="u-embla__btn u-embla__prev" aria-label="Anterior">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="u-embla__btn u-embla__next" aria-label="Siguiente">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
 
-        <button class="u-embla__btn u-embla__prev" aria-label="Anterior">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="u-embla__btn u-embla__next" aria-label="Siguiente">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
+        <div class="u-embla__dots" aria-hidden="true"></div>
       </div>
 
-      <div class="u-embla__dots" aria-hidden="true"></div>
     </div>
-
   </div>
 </section>
 
 <style is:global>
+  /* ── Tabs ───────────────────────────────────── */
+  .u-tab {
+    font-weight: 500;
+    border-radius: 4px;
+    color: color-mix(in srgb, var(--color-second) 50%, transparent);
+  }
+  .u-tab:hover {
+    color: var(--color-second);
+  }
+  .u-tab[data-active] {
+    background: var(--color-second);
+    color: var(--color-white);
+    font-weight: 700;
+  }
+
+  /* ── Left column fixed height on desktop ───── */
+  @media (min-width: 768px) {
+    #u-left-col {
+      min-height: 60svh;
+    }
+  }
+
   /* ── Carousel ───────────────────────────────── */
   .u-embla {
     position: relative;
@@ -144,13 +211,9 @@ const unitsJson = JSON.stringify(
     width: 100%;
     height: 50svh;
     border-radius: 16px;
+    background: #f5f5f0;
   }
 
-  @media (min-width: 768px) {
-    .u-embla__viewport {
-      height: 80svh;
-    }
-  }
   .u-embla__container {
     display: flex;
     user-select: none;
@@ -167,7 +230,6 @@ const unitsJson = JSON.stringify(
     height: 100%;
     object-fit: contain;
     display: block;
-    cursor: pointer;
   }
 
   /* ── Carousel buttons ───────────────────────── */
@@ -220,33 +282,22 @@ const unitsJson = JSON.stringify(
 <script>
   import EmblaCarousel from 'embla-carousel';
 
-  type Space = { name: string; m2: number };
   type UnitData = {
-    priceUSD: number;
-    interiorM2: number;
-    spaces: Space[];
+    images: string[];
     tourUrl: string;
-    gallery: string[];
+    features: (string | null)[];
   };
 
   const allUnits: Record<string, UnitData> = JSON.parse(
     document.getElementById('u-data')!.textContent!
   );
 
-  const typeKeysList = Object.keys(allUnits);
-  const floorMap: Record<string, string> = Object.fromEntries(
-    typeKeysList.map(k => [k, `fp-${k}`])
-  );
-  const floorImgs = typeKeysList.map(k => document.getElementById(`fp-${k}`)!);
-
   const viewport   = document.querySelector<HTMLElement>('.u-embla__viewport')!;
   const slidesEl   = document.getElementById('u-slides')!;
   const dotsEl     = document.querySelector<HTMLElement>('.u-embla__dots')!;
   const prevBtn    = document.querySelector<HTMLButtonElement>('.u-embla__prev')!;
   const nextBtn    = document.querySelector<HTMLButtonElement>('.u-embla__next')!;
-  const priceEl    = document.getElementById('u-price')!;
-  const interiorEl = document.getElementById('u-interior')!;
-  const spacesEl   = document.getElementById('u-spaces')!;
+  const featuresEl = document.getElementById('u-features')!;
   const tourBtn    = document.getElementById('u-tour-btn') as HTMLAnchorElement;
   const tabs       = document.querySelectorAll<HTMLButtonElement>('.u-tab');
 
@@ -280,7 +331,7 @@ const unitsJson = JSON.stringify(
 
   function initEmbla() {
     if (embla) embla.destroy();
-    embla = EmblaCarousel(viewport, { loop: true, align: 'start', containScroll: false });
+    embla = EmblaCarousel(viewport, { loop: false, align: 'start', containScroll: 'trimSnaps' });
     updateButtons();
     buildDots();
   }
@@ -288,11 +339,28 @@ const unitsJson = JSON.stringify(
   prevBtn.addEventListener('click', () => embla?.scrollPrev());
   nextBtn.addEventListener('click', () => embla?.scrollNext());
 
-  function spaceItem(s: Space) {
-    return `<li class="flex justify-between items-baseline gap-6 py-[0.6rem] border-b border-base/10 last:border-b-0">
-      <span class="text-[0.95rem] text-[rgba(7,50,71,0.7)]">${s.name}</span>
-      <span class="whitespace-nowrap text-[1.05rem] font-bold ml-0.5"><strong>${s.m2.toFixed(2)}</strong>&nbsp;<strong>m²</strong></span>
-    </li>`;
+  const leftCol = document.getElementById('u-left-col')!;
+  const dotsAreaPx = 24; // gap-4 (16px) + dots min-height (8px)
+
+  function syncCarouselToLeftCol() {
+    if (window.innerWidth < 768) {
+      viewport.style.height = '';
+      return;
+    }
+    requestAnimationFrame(() => {
+      const h = leftCol.offsetHeight - dotsAreaPx;
+      viewport.style.height = `${Math.max(h, 200)}px`;
+      embla?.reInit();
+    });
+  }
+
+  window.addEventListener('resize', syncCarouselToLeftCol);
+
+  function featureItem(f: string | null): string {
+    if (f === null) {
+      return `<li class="text-[24px] font-bold leading-none text-second/25">—</li>`;
+    }
+    return `<li class="text-[24px] leading-snug text-second/80">${f}</li>`;
   }
 
   function switchTab(type: string) {
@@ -300,29 +368,22 @@ const unitsJson = JSON.stringify(
     if (!unit) return;
 
     tabs.forEach(btn => {
-      const active = btn.dataset.tab === type;
-      btn.classList.toggle('font-extrabold', active);
-      btn.classList.toggle('border-base', active);
-      btn.classList.toggle('font-bold', !active);
-      btn.classList.toggle('border-transparent', !active);
-      btn.classList.toggle('opacity-40', !active);
-      btn.classList.toggle('hover:opacity-70', !active);
+      if (btn.dataset.tab === type) {
+        btn.setAttribute('data-active', '');
+      } else {
+        btn.removeAttribute('data-active');
+      }
     });
 
-    priceEl.textContent = `US$ ${unit.priceUSD.toLocaleString('en-US')}`;
-    interiorEl.textContent = `${unit.interiorM2} m²`;
+    featuresEl.innerHTML = unit.features.map(featureItem).join('');
     tourBtn.href = unit.tourUrl;
 
-    spacesEl.innerHTML = unit.spaces.map(spaceItem).join('');
-
-    floorImgs.forEach(img => img.classList.add('hidden'));
-    document.getElementById(floorMap[type])?.classList.remove('hidden');
-
-    slidesEl.innerHTML = unit.gallery
-      .map((src, i) => `<div class="u-embla__slide"><img src="${src}" data-full="${src}" alt="Vista ${i + 1}" loading="lazy" /></div>`)
+    slidesEl.innerHTML = unit.images
+      .map((src, i) => `<div class="u-embla__slide"><img src="${src}" alt="Plano ${i + 1}" loading="lazy" /></div>`)
       .join('');
 
     initEmbla();
+    syncCarouselToLeftCol();
   }
 
   tabs.forEach(btn => {
@@ -330,4 +391,5 @@ const unitsJson = JSON.stringify(
   });
 
   initEmbla();
+  document.fonts.ready.then(syncCarouselToLeftCol);
 </script>

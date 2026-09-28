@@ -6,8 +6,10 @@ import Galeria from '../components/Galeria.astro';
 import Lightbox from '../components/Lightbox.astro';
 import Amenidades from '../components/Amenidades.astro';
 import Disponibilidad_Update from '../components/Disponibilidad_Update.astro';
+import Unidades from '../components/Unidades.astro';
 import MapaBavaro from '../components/MapaBavaro.astro';
 import Pagos from '../components/Pagos.astro';
+import Amenities from '../components/Amenities.astro'
 import '@photo-sphere-viewer/core/index.css';
 import { env } from 'cloudflare:workers';
 
@@ -41,41 +43,64 @@ try {
   <main>
     <Hero />
 
-    <section id="descripcion" class="px-[4vw] py-24 text-center">
-      <div class="w-full max-w-3xl mx-auto flex flex-col items-center gap-8">
-        <div class="flex flex-col items-center gap-3">
-          <p id="desc-label" class="font-display font-black text-sm uppercase tracking-[0.25em] text-second">Acerca de</p>
-          <img id="desc-title" src="/logo.svg" alt="Costamare" class="w-[clamp(14rem,50vw,36rem)] h-auto" />
+    <section id="descripcion" class="px-[8vw] py-24 bg-white">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-12 md:gap-20">
+
+        <!-- Left: paragraphs + CTA -->
+        <div class="flex flex-col gap-6 text-second">
+          <div class="flex flex-col gap-5 text-[15px] leading-relaxed">
+            <p id="desc-p1">Nuestro proyecto desarrollado a solo pasos del Downtown Punta Cana, combina una arquitectura contemporánea con la tranquilidad del Caribe.</p>
+            <p id="desc-p2">Con 12 apartamentos distribuidos en 4 niveles, ofrece un entorno exclusivo y privado, pensado para quienes buscan un espacio propio sin renunciar a la comodidad.</p>
+            <p id="desc-p3">Cada unidad combina diseño moderno con funcionalidad, e incluye ascensor y 2 parqueos. Es un lugar para disfrutar del estilo de vida de Punta Cana y, al mismo tiempo, una inversión con alto potencial de rentabilidad en uno de los destinos más dinámicos del Caribe.</p>
+          </div>
+          <a
+            id="desc-cta"
+            href="/dossier.pdf"
+            download="dossier-blkr4.pdf"
+            class="self-start mt-2 px-8 py-3 border border-second text-second text-sm hover:bg-second hover:text-white transition-colors duration-300 no-underline"
+          >
+            Descargar <strong>Dossier</strong>
+          </a>
         </div>
 
-        <p id="desc-paragraph" class="text-[20px] md:text-3xl leading-relaxed max-w-3xl text-second">
-          Se trata de un desarrollo de baja densidad ubicado en Costa Cana, Bávaro, diseñado para combinar arquitectura contemporánea con alta rentabilidad.
-        </p>
+        <!-- Right: key stats -->
+        <div class="flex flex-col gap-4 text-second">
+          <div id="desc-stat1" class="bg-neutral-100 px-6 py-5">
+            <p class="stat-text font-medium leading-snug"><strong>12</strong> UNIDADES &nbsp;·&nbsp; desde <strong>70.60 m²</strong></p>
+          </div>
+          <div id="desc-stat2" class="bg-neutral-100 px-6 py-5">
+            <p class="stat-text leading-snug">Ubicado en Residencial <strong>Costa Cana</strong></p>
+          </div>
+          <div id="desc-stat3" class="bg-neutral-100 px-6 py-5">
+            <p class="stat-text leading-snug">Entrega en <strong>Noviembre 2028</strong></p>
+          </div>
+        </div>
 
-        <a
-          id="desc-cta"
-          href="/dossier.pdf"
-          download="dossier-costamare.pdf"
-          class="text-xl px-10 py-4 rounded-md border-2 border-base text-base font-medium hover:bg-base hover:text-white transition-colors duration-300 no-underline"
-        >
-          Descarga nuestro <strong>Dossier</strong>
-        </a>
+        <style>
+          .stat-text {
+            font-size: clamp(0.875rem, 0.5rem + 1.5vw, 1.5rem);
+          }
+        </style>
+
       </div>
     </section>
 
     <Galeria />
     <Lightbox />
-    <!-- <Unidades unitTypes={unitTypes} /> -->
+    <Amenities />
+    <Unidades />
     <Disponibilidad_Update units={units} />
-    <section id="maqueta" class="relative flex w-full h-[70svh] items-center justify-center overflow-hidden">
-      <div id="maqueta-psv" class="absolute inset-0 w-full h-full" style="pointer-events:none;"></div>
-      <div class="absolute inset-0 bg-base/50"></div>
-      <a
-        href="/tour/exterior"
-        class="relative z-10 px-8 py-4 text-[18px] rounded-full bg-white text-base hover:bg-base hover:text-white transition-colors duration-300"
-      >
-        Explorar Tour 360°
-      </a>
+    <section id="maqueta" class="hidden px-[8vw] py-0">
+      <div class="relative flex w-full max-w-322.25 mx-auto h-[70svh] items-center justify-center overflow-hidden rounded-3xl">
+        <div id="maqueta-psv" class="absolute inset-0 w-full h-full" style="pointer-events:none;"></div>
+        <div class="absolute inset-0 bg-base/50"></div>
+        <a
+          href="/tour/exterior"
+          class="relative z-10 px-8 py-4 text-[18px] rounded-full bg-white text-second hover:bg-second hover:text-white transition-colors duration-300"
+        >
+          Explorar Tour 360°
+        </a>
+      </div>
     </section>
         <div class="hidden"><Amenidades /></div>
     <MapaBavaro />

@@ -7,6 +7,7 @@ CREATE TABLE units (
   m2             REAL NOT NULL DEFAULT 0,
   patio_m2       REAL,
   terraza_m2     REAL,
+  locker_m2      REAL,
   m2_total       REAL NOT NULL DEFAULT 0,
   disponibilidad TEXT NOT NULL DEFAULT 'available'
                    CHECK(disponibilidad IN ('available','reserved','sold')),
@@ -19,12 +20,12 @@ INSERT INTO units (numero, disponibilidad) VALUES
   ('101', 'available'),
   ('102', 'available'),
   ('103', 'available'),
-  ('104', 'available'),
   ('201', 'available'),
   ('202', 'available'),
   ('203', 'available'),
-  ('204', 'available'),
   ('301', 'available'),
   ('302', 'available'),
   ('303', 'available'),
-  ('304', 'available');
+  ('401', 'available'),
+  ('402', 'available'),
+  ('403', 'available');

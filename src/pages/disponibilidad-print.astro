@@ -7,6 +7,7 @@ interface URow {
   m2: number;
   terraza_m2: number | null;
   patio_m2: number | null;
+  locker_m2: number | null;
   m2_total: number;
   disponibilidad: string;
   precio: number;
@@ -17,7 +18,7 @@ let units: URow[] = [];
 try {
   const db = env.DB;
   const res = await db.prepare(
-    'SELECT numero, m2, terraza_m2, patio_m2, m2_total, disponibilidad, precio FROM units ORDER BY numero'
+    'SELECT numero, m2, terraza_m2, patio_m2, locker_m2, m2_total, disponibilidad, precio FROM units ORDER BY numero'
   ).all<URow>();
   units = res.results ?? [];
 } catch (e) {
@@ -54,7 +55,7 @@ const statusColor: Record<string, string> = {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>Listado de precios – Costamare</title>
+  <title>Listado de precios – BLK Residences IV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet" />
@@ -239,7 +240,7 @@ const statusColor: Record<string, string> = {
   <div class="margin">
     <!-- Header -->
     <div class="header">
-      <img src="/logo.svg" alt="Costamare" class="logo" />
+      <img src="/logo.svg" alt="BLK Residences IV" class="logo" />
     </div>
     <!-- Title -->
     <div class="title-row">

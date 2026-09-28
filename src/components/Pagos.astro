@@ -1,52 +1,70 @@
 ---
 ---
 
-<section id="pagos" class="bg-second text-white px-[4vw] py-24 lg:flex lg:items-center">
-  <div class="max-w-7xl mx-auto flex flex-col gap-10">
+<section id="pagos" class="relative bg-second lg:min-h-[90svh]">
 
-    <h2 class="text-3xl md:text-4xl lg:text-5xl text-center">
-      <span class="font-display font-bold italic">Plan flexible</span>
-    </h2>
-
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-
-      <li class="flex items-start gap-4 px-6 py-6 lg:pl-0 border-b border-white/20 md:border-b md:border-r lg:border-b-0 lg:border-r">
-        <span class="font-display font-bold text-6xl text-base/40 leading-none select-none">1</span>
-        <div class="flex flex-col gap-1">
-          <p class="font-display font-bold text-2xl md:text-3xl">US$ 1,000</p>
-          <p class="text-sm text-white/70 leading-snug">Reservación</p>
-        </div>
-      </li>
-
-      <li class="flex items-start gap-4 px-6 py-6 border-b border-white/20 md:border-b md:border-r-0 lg:border-b-0 lg:border-r">
-        <span class="font-display font-bold text-6xl text-base/40 leading-none select-none">2</span>
-        <div class="flex flex-col gap-1">
-          <p class="font-display font-bold text-2xl md:text-3xl">10%</p>
-          <p class="text-sm text-white/70 leading-snug">Separación a la firma del contrato.</p>
-        </div>
-      </li>
-
-      <li class="flex items-start gap-4 px-6 py-6 border-b border-white/20 md:border-b-0 md:border-r lg:border-b-0 lg:border-r">
-        <span class="font-display font-bold text-6xl text-base/40 leading-none select-none">3</span>
-        <div class="flex flex-col gap-1">
-          <p class="font-display font-bold text-2xl md:text-3xl">30%</p>
-          <p class="text-sm text-white/70 leading-snug">Durante la construcción.</p>
-        </div>
-      </li>
-
-      <li class="flex items-start gap-4 px-6 py-6 border-b-0 md:border-r-0 lg:border-r-0">
-        <span class="font-display font-bold text-6xl text-base/40 leading-none select-none">4</span>
-        <div class="flex flex-col gap-1">
-          <p class="font-display font-bold text-2xl md:text-3xl">60%</p>
-          <p class="text-sm text-white/70 leading-snug">Contra entrega.</p>
-        </div>
-      </li>
-
-    </ul>
-
-    <div class="flex justify-center pt-6">
-      <img src="/logo.svg" alt="Costamare" class="h-25 w-auto brightness-0 invert opacity-80" />
-    </div>
-
+  <!-- Desktop: image covering right half, absolutely positioned -->
+  <div class="absolute inset-y-0 right-0 w-1/2 hidden lg:block">
+    <img
+      src="/assets/gallery/fuera.avif"
+      alt="BLK Residences IV - Exterior"
+      class="w-full h-full object-cover"
+    />
   </div>
+
+  <!-- Content: same max-w + padding as other sections -->
+  <div class="max-w-7xl mx-auto px-[4vw] relative lg:min-h-[90svh] flex items-center">
+    <div class="text-white flex flex-col gap-12 py-20 lg:py-32 w-full lg:w-1/2">
+
+      <h2 class="font-display font-bold italic text-4xl md:text-5xl">
+        Plan de pagos
+      </h2>
+
+      <ul class="flex flex-col gap-8">
+
+        <li class="flex items-center gap-4">
+          <span class="font-display font-bold italic text-8xl text-white/10 leading-none select-none w-20 shrink-0 text-right">1</span>
+          <div class="flex flex-col gap-1">
+            <p class="font-display font-bold italic text-3xl md:text-4xl">US$ 2,000</p>
+            <p class="text-sm md:text-base text-white/70 leading-snug">Reservación</p>
+          </div>
+        </li>
+
+        <li class="flex items-center gap-4">
+          <span class="font-display font-bold italic text-8xl text-white/10 leading-none select-none w-20 shrink-0 text-right">2</span>
+          <div class="flex flex-col gap-1">
+            <p class="font-display font-bold italic text-3xl md:text-4xl">10%</p>
+            <p class="text-sm md:text-base text-white/70 leading-snug">Separación a la firma<br />del contrato en 30 días.</p>
+          </div>
+        </li>
+
+        <li class="flex items-center gap-4">
+          <span class="font-display font-bold italic text-8xl text-white/10 leading-none select-none w-20 shrink-0 text-right">3</span>
+          <div class="flex flex-col gap-1">
+            <p class="font-display font-bold italic text-3xl md:text-4xl">20%</p>
+            <p class="text-sm md:text-base text-white/70 leading-snug">Durante la construcción.</p>
+          </div>
+        </li>
+
+        <li class="flex items-center gap-4">
+          <span class="font-display font-bold italic text-8xl text-white/10 leading-none select-none w-20 shrink-0 text-right">4</span>
+          <div class="flex flex-col gap-1">
+            <p class="font-display font-bold italic text-3xl md:text-4xl">60%</p>
+            <p class="text-sm md:text-base text-white/70 leading-snug">Contra entrega.</p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- Mobile: image below content -->
+  <div class="h-64 lg:hidden">
+    <img
+      src="/assets/gallery/fuera.avif"
+      alt="BLK Residences IV - Exterior"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
 </section>

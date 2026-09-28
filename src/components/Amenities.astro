@@ -1,0 +1,171 @@
+---
+const socialImages = [
+  { src: '/assets/gallery/social_frente.avif',  alt: 'Área social' },
+  { src: '/assets/gallery/social_costado.avif', alt: 'Área social costado' },
+  { src: '/assets/gallery/social_detras.avif',  alt: 'Área social detrás' },
+]
+---
+
+<section id="amenidades" class="py-20 px-[4vw]">
+  <div class="am-card">
+
+    <!-- RIGHT: auto-carousel (first in DOM → on top in mobile) -->
+    <div class="am-carousel" id="am-carousel">
+      {socialImages.map(({ src, alt }, i) => (
+        <img
+          src={src}
+          alt={alt}
+          class={`am-slide${i === 0 ? ' active' : ''}`}
+          loading="lazy"
+        />
+      ))}
+    </div>
+
+    <!-- LEFT: dark info panel -->
+    <div class="am-panel">
+      <p class="am-eyebrow">Amenidades</p>
+
+      <ul class="am-list">
+        <li>Recibidor</li>
+        <li>Gimnasio</li>
+        <li>Ascensor</li>
+        <li>Portón de seguridad</li>
+        <li>Control de acceso</li>
+      </ul>
+
+      <h2 class="am-heading">Área social en<br>el último nivel</h2>
+
+      <ul class="am-list">
+        <li>Piscina</li>
+        <li>Terraza techada</li>
+        <li>Terraza destechada</li>
+        <li>Área BBQ</li>
+        <li>Baño</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── wrapper ── */
+  .am-card {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    grid-template-areas: "panel carousel";
+    max-width: 1280px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  /* ── dark panel (column 1) ── */
+  .am-panel {
+    grid-area: panel;
+    background-color: #222222;
+    border-radius: 22px;
+    padding: 3.5rem 3rem 3.5rem 3.25rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .am-eyebrow {
+    font-family: var(--font-black-mango);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.3vw, 1.8rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #F3F3F3;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .am-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .am-list li {
+    color: rgba(243, 243, 243, 0.82);
+    font-family: var(--font-sans);
+    font-size: 0.925rem;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .am-heading {
+    font-family: var(--font-black-mango);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.3vw, 1.8rem);
+    color: #F3F3F3;
+    line-height: 1.15;
+    margin: 0 0 1.4rem 0;
+  }
+
+  /* ── carousel (column 2, overlaps panel) ── */
+  .am-carousel {
+    grid-area: carousel;
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-left: -5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    z-index: 2;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    min-height: 380px;
+  }
+
+  .am-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.95s ease;
+  }
+
+  .am-slide.active {
+    opacity: 1;
+  }
+
+  /* ── responsive ── */
+  @media (max-width: 720px) {
+    .am-card {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "carousel"
+        "panel";
+    }
+
+    .am-carousel {
+      margin: 0;
+      height: 65vw;
+      border-radius: 16px 16px 0 0;
+      min-height: unset;
+      box-shadow: none;
+    }
+
+    .am-panel {
+      border-radius: 0 0 18px 18px;
+      padding: 2.25rem 1.75rem 2.5rem;
+    }
+  }
+</style>
+
+<script>
+  const carousel = document.getElementById('am-carousel')!
+  const slides = carousel.querySelectorAll<HTMLElement>('.am-slide')
+  let idx = 0
+  const DELAY = 3600
+
+  setInterval(() => {
+    slides[idx].classList.remove('active')
+    idx = (idx + 1) % slides.length
+    slides[idx].classList.add('active')
+  }, DELAY)
+</script>

@@ -17,5 +17,7 @@ export default defineConfig({
     react()
   ],
 
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    remoteBindings: true,
+  }),
 });
