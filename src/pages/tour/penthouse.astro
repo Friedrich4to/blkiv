@@ -3,10 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import TourNav from '../../components/TourNav.astro';
 import '@photo-sphere-viewer/core/index.css';
 import '@photo-sphere-viewer/virtual-tour-plugin/index.css';
-import '@photo-sphere-viewer/map-plugin/index.css';
 ---
 
-<Layout title="Tour Penthouse" bare={true}>
+<Layout title="Tour Azotea" bare={true}>
   <TourNav />
   <div class="viewer-wrap">
     <div id="psv-container"></div>
@@ -25,101 +24,55 @@ import '@photo-sphere-viewer/map-plugin/index.css';
     width: 100%;
     height: 100%;
   }
+</style>
 
+<style is:global>
+  #psv-container .psv-loader { display: none; }
 </style>
 
 <script>
   import { Viewer } from '@photo-sphere-viewer/core';
   import { VirtualTourPlugin } from '@photo-sphere-viewer/virtual-tour-plugin';
-  import { MapPlugin } from '@photo-sphere-viewer/map-plugin';
-  
 
   const nodes = [
     {
-      id: 'sala',
-      panorama: '/tour/apt/sala_ph.avif',
-      name: 'Sala',
-      map: { x: 380, y: 580 },
+      id: 'bbq',
+      panorama: '/tour/azotea-bbq.avif',
+      name: 'BBQ',
       links: [
-        { nodeId: 'cocina', position: { yaw: '356deg', pitch: '-15deg' } },
-        { nodeId: 'balcon', position: { yaw: '160deg', pitch: '-25deg' } },
+        { nodeId: 'daybed',  position: { yaw: '-30deg',    pitch: '-15deg' } },
+        { nodeId: 'esquina', position: { yaw: '15deg',   pitch: '-3deg' } },
+        { nodeId: 'sofa',    position: { yaw: '60deg',  pitch: '-15deg' } },
       ],
     },
     {
-      id: 'balcon',
-      panorama: '/tour/apt/balcon_ph.avif',
-      name: 'Balcón',
-      map: { x: 410, y: 730 },
+      id: 'daybed',
+      panorama: '/tour/azotea-daybed.avif',
+      name: 'Daybed',
       links: [
-        { nodeId: 'sala', position: { yaw: '-15deg', pitch: '-25deg' } },
-        { nodeId: 'cocina', position: { yaw: '-5deg', pitch: '-10deg' } },
+        { nodeId: 'bbq',     position: { yaw: '160deg',  pitch: '-15deg' } },
+        { nodeId: 'esquina', position: { yaw: '40deg',  pitch: '-3deg' } },
+        { nodeId: 'sofa',    position: { yaw: '120deg',   pitch: '-7deg' } },
       ],
     },
     {
-      id: 'cocina',
-      panorama: '/tour/apt/cocina_ph.avif',
-      name: 'Cocina',
-      map: { x: 350, y: 300 },
+      id: 'esquina',
+      panorama: '/tour/azotea-esquina.avif',
+      name: 'Esquina',
       links: [
-        { nodeId: 'sala',        position: { yaw: '176deg', pitch: '-15deg' } },
-        { nodeId: 'entrada_hab', position: { yaw: '270deg', pitch: '-15deg' } },
-        { nodeId: 'terraza_1', position: { yaw: '320deg', pitch: '-15deg' } }
+        { nodeId: 'bbq',     position: { yaw: '-160deg',  pitch: '-5deg' } },
+        { nodeId: 'daybed',  position: { yaw: '-140deg',   pitch: '-5deg' } },
+        { nodeId: 'sofa',    position: { yaw: '175deg',    pitch: '-8deg' } },
       ],
     },
     {
-      id: 'entrada_hab',
-      panorama: '/tour/apt/entrada_hab.avif',
-      name: 'Entrada Hab.',
-      map: { x: 200, y: 320 },
+      id: 'sofa',
+      panorama: '/tour/azotea-sofa.avif',
+      name: 'Sofá',
       links: [
-        { nodeId: 'cocina', position: { yaw: '35deg',  pitch: '-25deg' } },
-        { nodeId: 'hab',    position: { yaw: '221deg', pitch: '-25deg' } },
-        { nodeId: 'terraza_1', position: { yaw: '0deg',  pitch: '-15deg' } },
-      ],
-    },
-    {
-      id: 'hab',
-      panorama: '/tour/apt/hab.avif',
-      name: 'Habitación',
-      map: { x: 100, y: 470 },
-      links: [
-        { nodeId: 'entrada_hab',    position: { yaw: '30deg', pitch: '-25deg' } },
-        { nodeId: 'walking_closet', position: { yaw: '4deg',  pitch: '-25deg' } },
-      ],
-    },
-    {
-      id: 'walking_closet',
-      panorama: '/tour/apt/walking%20closet.avif',
-      name: 'Walking Closet',
-      map: { x: 120, y: 220 },
-      links: [
-        { nodeId: 'hab',  position: { yaw: '184deg', pitch: '-15deg' } },
-        { nodeId: 'bath', position: { yaw: '0deg',   pitch: '-15deg' } },
-      ],
-    },
-    {
-      id: 'bath',
-      panorama: '/tour/apt/bath.avif',
-      name: 'Baño',
-      map: { x: 120, y: 80 },
-      links: [{ nodeId: 'walking_closet', position: { yaw: '180deg', pitch: '-45deg' } }],
-    },
-    {
-      id: 'terraza_1',
-      panorama: '/tour/apt/terraza_1.avif',
-      name: 'Terraza_1',
-      links: [
-        { nodeId: 'entrada_hab', position: { yaw: '20deg', pitch: '-5deg' } },
-        { nodeId: 'terraza_2', position: { yaw: '35deg', pitch: '-5deg' } },
-      ],
-    },
-    {
-      id: 'terraza_2',
-      panorama: '/tour/apt/terraza_2.avif',
-      name: 'Terraza_2',
-      links: [
-        { nodeId: 'entrada_hab', position: { yaw: '-55deg', pitch: '-15deg' } },
-        { nodeId: 'terraza_1', position: { yaw: '230deg', pitch: '-5deg' } },
+        { nodeId: 'bbq',     position: { yaw: '240deg',    pitch: '-15deg' } },
+        { nodeId: 'daybed',  position: { yaw: '-70deg',  pitch: '-10deg' } },
+        { nodeId: 'esquina', position: { yaw: '-10deg',   pitch: '-5deg' } },
       ],
     },
   ];
@@ -127,24 +80,20 @@ import '@photo-sphere-viewer/map-plugin/index.css';
   new Viewer({
     container: document.getElementById('psv-container') as HTMLElement,
     navbar: false,
+    loadingTxt: '',
     defaultZoomLvl: 0,
     plugins: [
-      [MapPlugin, {
-        size: '300px',
-        defaultZoom: 30,
-        minZoom: 10,
-        maxZoom: 100,
-        shape: 'square'
-      }],
       [VirtualTourPlugin, {
         positionMode: 'manual',
         renderMode: '2d',
         arrowStyle: { size: { width: 40, height: 40 } },
         nodes,
-        map: {
-          imageUrl: '/assets/units/ph-1_map.png',
-          center: { x: 240, y: 420 },
-        }
+        transitionOptions: {
+          showLoader: false,
+          speed: '20rpm',
+          effect: 'fade',
+          rotation: true,
+        },
       }],
     ],
   });

@@ -1,0 +1,160 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TourNav from '../../components/TourNav.astro';
+import '@photo-sphere-viewer/core/index.css';
+import '@photo-sphere-viewer/virtual-tour-plugin/index.css';
+---
+
+<Layout title="Tour 2do Piso" bare={true}>
+  <TourNav />
+  <div class="viewer-wrap">
+    <div id="psv-container"></div>
+  </div>
+</Layout>
+
+<style>
+  .viewer-wrap {
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  #psv-container {
+    width: 100%;
+    height: 100%;
+  }
+
+</style>
+
+<script>
+  import { Viewer } from '@photo-sphere-viewer/core';
+  import { VirtualTourPlugin } from '@photo-sphere-viewer/virtual-tour-plugin';
+
+
+  const nodes = [
+    {
+      id: 't1',
+      panorama: '/tour/tipo1/1.avif',
+      name: 'Entrada',
+      links: [
+        { nodeId: 't9', position: { yaw: '45deg',   pitch: '-30deg' } },
+        { nodeId: 't6', position: { yaw: '-10deg', pitch: '-20deg' } },
+        { nodeId: 't2', position: { yaw: '-40deg', pitch: '-10deg' } },
+      ],
+    },
+    {
+      id: 't2',
+      panorama: '/tour/tipo1/2.avif',
+      name: 'Comedor',
+      links: [
+        { nodeId: 't1', position: { yaw: '130deg',   pitch: '-20deg' } },
+        { nodeId: 't3', position: { yaw: '-110deg',  pitch: '-16deg' } },
+        { nodeId: 't4', position: { yaw: '-63deg', pitch: '-30deg' } },
+        { nodeId: 't9', position: { yaw: '108deg', pitch: '-25deg' } },
+        { nodeId: 't6', position: { yaw: '52deg', pitch: '-27deg' } },
+      ],
+    },
+    {
+      id: 't3',
+      panorama: '/tour/tipo1/3.avif',
+      name: 'Sala',
+      links: [
+        { nodeId: 't2',  position: { yaw: '63deg',   pitch: '-20deg' } },
+        { nodeId: 't4',  position: { yaw: '26deg', pitch: '-25deg' } },
+        { nodeId: 't11', position: { yaw: '-55deg', pitch: '-25deg' } },
+      ],
+    },
+    {
+      id: 't4',
+      panorama: '/tour/tipo1/4.avif',
+      name: 'Hab. Principal',
+      links: [
+        { nodeId: 't2', position: { yaw: '140deg',   pitch: '-30deg' } },
+        { nodeId: 't5', position: { yaw: '60deg', pitch: '-25deg' } },
+      ],
+    },
+    {
+      id: 't5',
+      panorama: '/tour/tipo1/5.avif',
+      name: 'Baño privado',
+      links: [
+        { nodeId: 't4', position: { yaw: '-110deg', pitch: '-30deg' } },
+      ],
+    },
+    {
+      id: 't6',
+      panorama: '/tour/tipo1/6.avif',
+      name: 'Pasillo',
+      links: [
+        { nodeId: 't7', position: { yaw: '0deg',   pitch: '-30deg' } },
+        { nodeId: 't8', position: { yaw: '90deg',  pitch: '-25deg' } },
+        { nodeId: 't1', position: { yaw: '170deg', pitch: '-25deg' } },
+        { nodeId: 't2', position: { yaw: '-160deg', pitch: '-45deg' } },
+      ],
+    },
+    {
+      id: 't7',
+      panorama: '/tour/tipo1/7.avif',
+      name: 'Baño visitas',
+      links: [
+        { nodeId: 't6', position: { yaw: '180deg', pitch: '-35deg' } },
+      ],
+    },
+    {
+      id: 't8',
+      panorama: '/tour/tipo1/8.avif',
+      name: 'Hab. secundaria',
+      links: [
+        { nodeId: 't6', position: { yaw: '-90deg', pitch: '-30deg' } },
+      ],
+    },
+    {
+      id: 't9',
+      panorama: '/tour/tipo1/9.avif',
+      name: 'Cocina',
+      links: [
+        { nodeId: 't1',  position: { yaw: '-130deg',   pitch: '-30deg' } },
+        { nodeId: 't2',  position: { yaw: '-70deg',  pitch: '-15deg' } },
+        { nodeId: 't6',  position: { yaw: '-50deg', pitch: '-15deg' } },
+        { nodeId: 't10', position: { yaw: '90deg', pitch: '-40deg' } },
+      ],
+    },
+    {
+      id: 't10',
+      panorama: '/tour/tipo1/10.avif',
+      name: 'Área de lavado',
+      links: [
+        { nodeId: 't9', position: { yaw: '-90deg', pitch: '-35deg' } },
+      ],
+    },
+    {
+      id: 't11',
+      panorama: '/tour/tipo1/11.avif',
+      name: 'Balcón',
+      links: [
+        { nodeId: 't3', position: { yaw: '45deg', pitch: '-35deg' } },
+      ],
+    },
+  ];
+
+  new Viewer({
+    container: document.getElementById('psv-container') as HTMLElement,
+    navbar: false,
+    defaultZoomLvl: 0,
+    plugins: [
+      [VirtualTourPlugin, {
+        positionMode: 'manual',
+        renderMode: '2d',
+        arrowStyle: { size: { width: 40, height: 40 } },
+        nodes,
+        transitionOptions: {
+          showLoader: false,
+          speed: '20rpm',
+          effect: 'fade',
+          rotation: true,
+        },
+      }],
+    ],
+  });
+</script>

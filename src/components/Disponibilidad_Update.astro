@@ -28,7 +28,7 @@ const units = rawUnits.map(u => ({
   terraza_m2:     u.terraza_m2,
   m2_total:       u.m2_total,
   tourUrl:        u.tour_url ?? '#',
-  tourHref:       u.numero.startsWith('1') ? '/tour/interior' : '/tour/piso-2-3',
+  tourHref:       u.numero.endsWith('2') ? '/tour/tipo2' : '/tour/tipo1',
   precio:         u.precio,
 }));
 
@@ -207,11 +207,12 @@ function getFloorLabel(numero: string): string {
                       </div>
 
                       <!-- Tour button -->
-                      <span
-                        class="block text-center px-4 py-3 rounded-lg bg-second/30 text-white/50 font-bold text-sm leading-none cursor-not-allowed select-none"
+                      <a
+                        href={unit.tourHref}
+                        class="block text-center px-4 py-3 rounded-lg bg-second text-white font-bold text-sm leading-none hover:bg-second/80 transition-colors duration-200 no-underline"
                       >
                         Explorar Tour virtual
-                      </span>
+                      </a>
 
                       <!-- Ficha técnica button -->
                       <span

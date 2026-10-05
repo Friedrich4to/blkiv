@@ -2,10 +2,10 @@
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const tours = [
-  { label: 'Exterior',   href: '/tour/exterior',   disabled: false },
-  { label: 'Piso 1',    href: '/tour/interior',   disabled: false },
-  { label: 'Piso 2 y 3', href: '/tour/piso-2-3',  disabled: false },
-  { label: 'Terraza',   href: '/tour/azotea',     disabled: false },
+  { label: 'Área social', href: '/tour/areasocial', disabled: false },
+  { label: 'Tipo 01/03',  href: '/tour/tipo1',      disabled: false },
+  { label: 'Tipo 02',     href: '/tour/tipo2',      disabled: false },
+  { label: 'Penthouse',   href: '/tour/penthouse',  disabled: true },
 ];
 ---
 
@@ -85,7 +85,7 @@ const tours = [
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background: #FAF6F3;
+    background: var(--color-white);
     border-radius: 12px;
     padding: 1rem 2rem;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
@@ -107,7 +107,7 @@ const tours = [
   .tour-nav__back {
     font-size: 0.875rem;
     font-weight: 500;
-    color: #1C1C1C;
+    color: var(--color-second);
     text-decoration: none;
     padding: 0.4rem 0.875rem;
     border-radius: 8px;
@@ -115,11 +115,12 @@ const tours = [
   }
 
   .tour-nav__back:hover {
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(32, 32, 32, 0.06);
   }
 
   .tour-nav__sep {
-    color: #c5cdd4;
+    color: var(--color-base);
+    opacity: 0.35;
     font-size: 1rem;
     user-select: none;
   }
@@ -136,7 +137,7 @@ const tours = [
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #1C1C1C;
+    color: var(--color-second);
     text-decoration: none;
     padding: 0.4rem 1rem;
     border-radius: 8px;
@@ -144,12 +145,12 @@ const tours = [
   }
 
   .tour-nav__link:hover:not(.tour-nav__link--active) {
-    background: rgba(32, 84, 105, 0.1);
+    background: rgba(32, 32, 32, 0.08);
   }
 
   .tour-nav__link--active {
-    background: #205469;
-    color: #FAF6F3;
+    background: var(--color-second);
+    color: var(--color-white);
   }
 
   .tour-nav__link--disabled {
@@ -170,7 +171,7 @@ const tours = [
     right: 0;
     z-index: 9998;
     height: 70svh;
-    background: #FAF6F3;
+    background: var(--color-white);
     border-radius: 12px 12px 0 0;
     box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.18);
     padding: 1rem 2rem 2rem;
@@ -193,7 +194,8 @@ const tours = [
   .tour-mobile__handle {
     width: 2.5rem;
     height: 4px;
-    background: #c5cdd4;
+    background: var(--color-base);
+    opacity: 0.3;
     border-radius: 2px;
     align-self: center;
     margin-bottom: 0.5rem;
@@ -212,7 +214,7 @@ const tours = [
   .tour-mobile__back {
     font-size: 1rem;
     font-weight: 500;
-    color: #1C1C1C;
+    color: var(--color-second);
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -220,7 +222,7 @@ const tours = [
   }
 
   .tour-mobile__back:hover {
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(32, 32, 32, 0.06);
   }
 
   .tour-mobile__links {
@@ -238,7 +240,7 @@ const tours = [
     width: 100%;
     font-size: 1.25rem;
     font-weight: 500;
-    color: #1C1C1C;
+    color: var(--color-second);
     text-decoration: none;
     padding: 0.75rem 1rem;
     border-radius: 8px;
@@ -247,12 +249,12 @@ const tours = [
   }
 
   .tour-mobile__link:hover:not(.tour-mobile__link--active) {
-    background: rgba(32, 84, 105, 0.1);
+    background: rgba(32, 32, 32, 0.08);
   }
 
   .tour-mobile__link--active {
-    background: #205469;
-    color: #FAF6F3;
+    background: var(--color-second);
+    color: var(--color-white);
   }
 
   .tour-mobile__link--disabled {

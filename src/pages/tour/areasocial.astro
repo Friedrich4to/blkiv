@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TourNav from '../../components/TourNav.astro';
+import '@photo-sphere-viewer/core/index.css';
+import '@photo-sphere-viewer/virtual-tour-plugin/index.css';
+---
+
+<Layout title="Tour Exterior" bare={true}>
+  <TourNav />
+  <div class="viewer-wrap">
+    <div id="psv-container"></div>
+  </div>
+</Layout>
+
+<style>
+  .viewer-wrap {
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  #psv-container {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<style is:global>
+  #psv-container .psv-loader { display: none; }
+</style>
+
+<script>
+  import { Viewer } from '@photo-sphere-viewer/core';
+  import { VirtualTourPlugin } from '@photo-sphere-viewer/virtual-tour-plugin';
+
+  const nodes = [
+    {
+      id: 's1',
+      panorama: '/tour/social/1.avif',
+      name: 'Social 1',
+      links: [
+        { nodeId: 's2', position: { yaw: '0deg',    pitch: '-20deg' } },
+        { nodeId: 's3', position: { yaw: '35deg',  pitch: '-10deg' } },
+        { nodeId: 's5', position: { yaw: '-40deg',  pitch: '-5deg' } },
+      ],
+    },
+    {
+      id: 's2',
+      panorama: '/tour/social/2.avif',
+      name: 'Social 2',
+      links: [
+        { nodeId: 's7', position: { yaw: '0deg',    pitch: '-5deg' } },
+        { nodeId: 's5', position: { yaw: '-90deg',   pitch: '-20deg' } },
+        { nodeId: 's3', position: { yaw: '90deg',  pitch: '-20deg' } },
+        { nodeId: 's1', position: { yaw: '180deg',  pitch: '-25deg' } },
+      ],
+    },
+    {
+      id: 's3',
+      panorama: '/tour/social/3.avif',
+      name: 'Social 3',
+      links: [
+        { nodeId: 's2', position: { yaw: '-100deg',    pitch: '-20deg' } },
+        { nodeId: 's4', position: { yaw: '0deg',  pitch: '-25deg' } },
+        { nodeId: 's7', position: { yaw: '-50deg',  pitch: '-5deg' } },
+        { nodeId: 's1', position: { yaw: '-140deg',  pitch: '-10deg' } },
+      ],
+    },
+    {
+      id: 's4',
+      panorama: '/tour/social/4.avif',
+      name: 'Social 4',
+      links: [
+        { nodeId: 's3', position: { yaw: '180deg',    pitch: '-15deg' } },
+        { nodeId: 's7', position: { yaw: '-90deg',  pitch: '10deg' } },
+      ],
+    },
+    {
+      id: 's5',
+      panorama: '/tour/social/5.avif',
+      name: 'Social 5',
+      links: [
+        { nodeId: 's2', position: { yaw: '90deg',    pitch: '-20deg' } },
+        { nodeId: 's6', position: { yaw: '-5deg',   pitch: '-20deg' } },
+        { nodeId: 's7', position: { yaw: '30deg',  pitch: '-5deg' } },
+        { nodeId: 's1', position: { yaw: '140deg',  pitch: '-10deg' } },
+      ],
+    },
+    {
+      id: 's6',
+      panorama: '/tour/social/6.avif',
+      name: 'Social 6',
+      links: [
+        { nodeId: 's5', position: { yaw: '160deg',    pitch: '-20deg' } },
+        { nodeId: 's7', position: { yaw: '90deg',  pitch: '-5deg' } },
+      ],
+    },
+    {
+      id: 's7',
+      panorama: '/tour/social/7.avif',
+      name: 'Social 7',
+      links: [
+        { nodeId: 's2', position: { yaw: '180deg',    pitch: '-12deg' } },
+        { nodeId: 's3', position: { yaw: '110deg',   pitch: '-5deg' } },
+        { nodeId: 's5', position: { yaw: '-130deg',  pitch: '-8deg' } },
+      ],
+    },
+  ];
+
+  new Viewer({
+    container: document.getElementById('psv-container') as HTMLElement,
+    navbar: false,
+    loadingTxt: '',
+    defaultZoomLvl: 0,
+    plugins: [
+      [VirtualTourPlugin, {
+        positionMode: 'manual',
+        renderMode: '2d',
+        arrowStyle: { size: { width: 40, height: 40 } },
+        nodes,
+      }],
+    ],
+  });
+</script>
