@@ -28,7 +28,7 @@ const units = rawUnits.map(u => ({
   terraza_m2:     u.terraza_m2,
   m2_total:       u.m2_total,
   tourUrl:        u.tour_url ?? '#',
-  tourHref:       u.numero.endsWith('2') ? '/tour/tipo2' : '/tour/tipo1',
+  tourHref:       u.numero.startsWith('4') && u.numero !== '402' ? '/tour/penthouse' : (u.numero.endsWith('2') ? '/tour/tipo2' : '/tour/tipo1'),
   precio:         u.precio,
 }));
 

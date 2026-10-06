@@ -5,7 +5,7 @@ import '@photo-sphere-viewer/core/index.css';
 import '@photo-sphere-viewer/virtual-tour-plugin/index.css';
 ---
 
-<Layout title="Tour Azotea" bare={true}>
+<Layout title="Tour Penthouse" bare={true}>
   <TourNav />
   <div class="viewer-wrap">
     <div id="psv-container"></div>
@@ -36,43 +36,111 @@ import '@photo-sphere-viewer/virtual-tour-plugin/index.css';
 
   const nodes = [
     {
-      id: 'bbq',
-      panorama: '/tour/azotea-bbq.avif',
-      name: 'BBQ',
+      id: 't1',
+      panorama: '/tour/penthouse/t1.avif',
+      name: 'Terraza',
       links: [
-        { nodeId: 'daybed',  position: { yaw: '-30deg',    pitch: '-15deg' } },
-        { nodeId: 'esquina', position: { yaw: '15deg',   pitch: '-3deg' } },
-        { nodeId: 'sofa',    position: { yaw: '60deg',  pitch: '-15deg' } },
+        { nodeId: '1',  position: { yaw: '90deg',   pitch: '-25deg' } },
+        { nodeId: 't2', position: { yaw: '0deg', pitch: '-15deg' } },
       ],
     },
     {
-      id: 'daybed',
-      panorama: '/tour/azotea-daybed.avif',
-      name: 'Daybed',
+      id: 't2',
+      panorama: '/tour/penthouse/t2.avif',
+      name: 'Terraza 2',
       links: [
-        { nodeId: 'bbq',     position: { yaw: '160deg',  pitch: '-15deg' } },
-        { nodeId: 'esquina', position: { yaw: '40deg',  pitch: '-3deg' } },
-        { nodeId: 'sofa',    position: { yaw: '120deg',   pitch: '-7deg' } },
+        { nodeId: 't1', position: { yaw: '180deg',   pitch: '-15deg' } },
+        { nodeId: 't3', position: { yaw: '0deg', pitch: '-15deg' } },
       ],
     },
     {
-      id: 'esquina',
-      panorama: '/tour/azotea-esquina.avif',
-      name: 'Esquina',
+      id: 't3',
+      panorama: '/tour/penthouse/t3.avif',
+      name: 'Terraza 3',
       links: [
-        { nodeId: 'bbq',     position: { yaw: '-160deg',  pitch: '-5deg' } },
-        { nodeId: 'daybed',  position: { yaw: '-140deg',   pitch: '-5deg' } },
-        { nodeId: 'sofa',    position: { yaw: '175deg',    pitch: '-8deg' } },
+        { nodeId: 't2', position: { yaw: '190deg', pitch: '-10deg' } },
       ],
     },
     {
-      id: 'sofa',
-      panorama: '/tour/azotea-sofa.avif',
-      name: 'Sofá',
+      id: '1',
+      panorama: '/tour/penthouse/1.avif',
+      name: 'Entrada',
       links: [
-        { nodeId: 'bbq',     position: { yaw: '240deg',    pitch: '-15deg' } },
-        { nodeId: 'daybed',  position: { yaw: '-70deg',  pitch: '-10deg' } },
-        { nodeId: 'esquina', position: { yaw: '-10deg',   pitch: '-5deg' } },
+        { nodeId: 't1', position: { yaw: '-135deg', pitch: '-25deg' } },
+        { nodeId: '2',  position: { yaw: '30deg',    pitch: '-25deg' } },
+        { nodeId: '6',  position: { yaw: '0deg',  pitch: '-25deg' } },
+      ],
+    },
+    {
+      id: '2',
+      panorama: '/tour/penthouse/2.avif',
+      name: 'Comedor',
+      links: [
+        { nodeId: '1', position: { yaw: '-120deg', pitch: '-15deg' } },
+        { nodeId: '3', position: { yaw: '110deg', pitch: '-15deg' } },
+        { nodeId: '4', position: { yaw: '60deg',   pitch: '-25deg' } },
+      ],
+    },
+    {
+      id: '3',
+      panorama: '/tour/penthouse/3.avif',
+      name: 'Sala',
+      links: [
+        { nodeId: '2', position: { yaw: '-45deg', pitch: '-20deg' } },
+        { nodeId: '4', position: { yaw: '-30deg',   pitch: '-15deg' } },
+        { nodeId: '9', position: { yaw: '50deg',  pitch: '-15deg' } },
+      ],
+    },
+    {
+      id: '4',
+      panorama: '/tour/penthouse/4.avif',
+      name: 'Hab. Principal',
+      links: [
+        { nodeId: '2', position: { yaw: '180deg', pitch: '-15deg' } },
+        { nodeId: '5', position: { yaw: '-55deg',   pitch: '-15deg' } },
+      ],
+    },
+    {
+      id: '5',
+      panorama: '/tour/penthouse/5.avif',
+      name: 'Baño Principal',
+      links: [
+        { nodeId: '4', position: { yaw: '120deg', pitch: '-15deg' } },
+      ],
+    },
+    {
+      id: '6',
+      panorama: '/tour/penthouse/6.avif',
+      name: 'Pasillo',
+      links: [
+        { nodeId: '1', position: { yaw: '180deg', pitch: '-20deg' } },
+        { nodeId: '7', position: { yaw: '-90deg', pitch: '-25deg' } },
+        { nodeId: '8', position: { yaw: '0deg',  pitch: '-25deg' } },
+        { nodeId: '2', position: { yaw: '145deg',  pitch: '-35deg' } },
+      ],
+    },
+    {
+      id: '7',
+      panorama: '/tour/penthouse/7.avif',
+      name: 'Hab. Secundaria',
+      links: [
+        { nodeId: '6', position: { yaw: '90deg', pitch: '-20 deg' } },
+      ],
+    },
+    {
+      id: '8',
+      panorama: '/tour/penthouse/8.avif',
+      name: 'Baño visitas',
+      links: [
+        { nodeId: '6', position: { yaw: '180deg', pitch: '-35 deg' } },
+      ],
+    },
+    {
+      id: '9',
+      panorama: '/tour/penthouse/9.avif',
+      name: 'Balcón',
+      links: [
+        { nodeId: '2', position: { yaw: '-90deg', pitch: '-15deg' } },
       ],
     },
   ];
@@ -87,6 +155,7 @@ import '@photo-sphere-viewer/virtual-tour-plugin/index.css';
         positionMode: 'manual',
         renderMode: '2d',
         arrowStyle: { size: { width: 40, height: 40 } },
+        startNodeId: '1',
         nodes,
         transitionOptions: {
           showLoader: false,
