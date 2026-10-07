@@ -186,8 +186,6 @@ function getFloorLabel(numero: string): string {
                         <span class="font-semibold">{getFloorLabel(unit.numero)}</span>
                         <span class="flex items-center gap-1.5">
                           <img src="/assets/icons/size.svg" alt="" class="h-4 w-auto brightness-0" aria-hidden="true" />
-                          <span class="opacity-40">{unit.m2} m²</span>
-                          <span class="opacity-30 select-none mx-0.5">|</span>
                           {unit.m2_total} m²
                         </span>
                         <span class="flex items-center gap-1.5">
@@ -205,6 +203,11 @@ function getFloorLabel(numero: string): string {
                           2
                         </span>
                       </div>
+
+                      <!-- Size breakdown -->
+                      <p class="text-sm text-second/75 -mt-1">
+                        Interior: {unit.m2} m²{unit.patio_m2 ? ` | Patio: ${unit.patio_m2} m²` : unit.terraza_m2 ? ` | Terraza: ${unit.terraza_m2} m²` : ''}
+                      </p>
 
                       <!-- Tour button -->
                       <a

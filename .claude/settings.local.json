@@ -100,7 +100,8 @@
       "Bash(findstr /r \"SELECT.*FROM units\" src\\\\pages\\\\*.astro src\\\\pages\\\\api\\\\*.ts)",
       "Bash(Select-String -Pattern \"social\")",
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\" -Recurse -Filter \"tailwind*\")",
-      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\public\\\\tour\\\\penthouse\" -ErrorAction SilentlyContinue)"
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\frede\\\\Documents\\\\Clientes\\\\0_Inmobiliarias\\\\BLK-IV\\\\blkiv_web\\\\public\\\\tour\\\\penthouse\" -ErrorAction SilentlyContinue)",
+      "Bash(python3 -c ' *)"
     ]
   }
 }
