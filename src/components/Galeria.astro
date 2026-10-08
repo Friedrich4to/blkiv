@@ -96,22 +96,23 @@ const slides = [
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    background: rgba(32, 84, 105, 0.85);
-    color: #F4F4F4;
+    background: #202020;
+    color: #F3F3F3;
     border: none;
-    border-radius: 50%;
+    border-radius: 8px;
     width: 66px;
     height: 66px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    opacity: 0.85;
     transition: background 0.2s, opacity 0.2s;
-    backdrop-filter: blur(4px);
   }
 
   .embla__btn:hover {
-    background: rgba(32, 84, 105, 1);
+    background: #525252;
+    opacity: 1;
   }
 
   .embla__btn:disabled {
